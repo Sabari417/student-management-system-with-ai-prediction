@@ -9,7 +9,13 @@ const emptyForm = {
     department: "",
     email: "",
     phone: "",
-    year: ""
+    year: "",
+    attendance: "",
+    internal_marks: "",
+    assignment_marks: "",
+    previous_gpa: "",
+    study_hours: "",
+    backlogs: ""
 };
 
 const AddStudent = () => {
@@ -18,6 +24,7 @@ const AddStudent = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("Sending student data:", formData);
 
         try {
             await api.post("/students", {
@@ -26,8 +33,15 @@ const AddStudent = () => {
                 department: formData.department,
                 email: formData.email,
                 phone: formData.phone,
-                year: Number(formData.year)
+                year: Number(formData.year),
+                attendance: Number(formData.attendance),
+                internal_marks: Number(formData.internal_marks),
+                assignment_marks: Number(formData.assignment_marks),
+                previous_gpa: Number(formData.previous_gpa),
+                study_hours: Number(formData.study_hours),
+                backlogs: Number(formData.backlogs)
             });
+            
 
             alert("Student added successfully!");
 

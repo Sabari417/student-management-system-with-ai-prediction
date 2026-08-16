@@ -4,11 +4,15 @@ const express = require("express");
 const cors = require("cors");
 
 const studentRoutes = require("./routes/studentRoutes");
+const mlRoutes = require("./routes/mlRoutes");
+
+
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/api/ml", mlRoutes);
 
 app.get("/", (req, res) => {
     res.json({

@@ -46,9 +46,35 @@ const getStudentById = async (req, res) => {
 
 const createStudent = async (req, res) => {
     try {
-        const { name, age, department, email, phone, year } = req.body;
+        const {
+            name,
+            age,
+            department,
+            email,
+            phone,
+            year,
+            attendance,
+            internal_marks,
+            assignment_marks,
+            previous_gpa,
+            study_hours,
+            backlogs
+        } = req.body;
 
-        if (!name || !age || !department || !email || !phone || !year) {
+        if (
+            !name ||
+            !age ||
+            !department ||
+            !email ||
+            !phone ||
+            !year ||
+            attendance === undefined ||
+            internal_marks === undefined ||
+            assignment_marks === undefined ||
+            previous_gpa === undefined ||
+            study_hours === undefined ||
+            backlogs === undefined
+        ) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required"
@@ -57,9 +83,35 @@ const createStudent = async (req, res) => {
 
         const [result] = await db.query(
             `INSERT INTO students
-            (name, age, department, email, phone, year)
-            VALUES (?, ?, ?, ?, ?, ?)`,
-            [name, age, department, email, phone, year]
+            (
+                name,
+                age,
+                department,
+                email,
+                phone,
+                year,
+                attendance,
+                internal_marks,
+                assignment_marks,
+                previous_gpa,
+                study_hours,
+                backlogs
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [
+                name,
+                age,
+                department,
+                email,
+                phone,
+                year,
+                attendance,
+                internal_marks,
+                assignment_marks,
+                previous_gpa,
+                study_hours,
+                backlogs
+            ]
         );
 
         const [rows] = await db.query(
@@ -72,6 +124,7 @@ const createStudent = async (req, res) => {
             message: "Student added successfully",
             data: rows[0]
         });
+
     } catch (error) {
         console.error(error);
 
@@ -91,9 +144,35 @@ const createStudent = async (req, res) => {
 
 const updateStudent = async (req, res) => {
     try {
-        const { name, age, department, email, phone, year } = req.body;
+        const {
+            name,
+            age,
+            department,
+            email,
+            phone,
+            year,
+            attendance,
+            internal_marks,
+            assignment_marks,
+            previous_gpa,
+            study_hours,
+            backlogs
+        } = req.body;
 
-        if (!name || !age || !department || !email || !phone || !year) {
+        if (
+            !name ||
+            !age ||
+            !department ||
+            !email ||
+            !phone ||
+            !year ||
+            attendance === undefined ||
+            internal_marks === undefined ||
+            assignment_marks === undefined ||
+            previous_gpa === undefined ||
+            study_hours === undefined ||
+            backlogs === undefined
+        ) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required"
@@ -102,9 +181,35 @@ const updateStudent = async (req, res) => {
 
         const [result] = await db.query(
             `UPDATE students
-            SET name = ?, age = ?, department = ?, email = ?, phone = ?, year = ?
+            SET
+                name = ?,
+                age = ?,
+                department = ?,
+                email = ?,
+                phone = ?,
+                year = ?,
+                attendance = ?,
+                internal_marks = ?,
+                assignment_marks = ?,
+                previous_gpa = ?,
+                study_hours = ?,
+                backlogs = ?
             WHERE id = ?`,
-            [name, age, department, email, phone, year, req.params.id]
+            [
+                name,
+                age,
+                department,
+                email,
+                phone,
+                year,
+                attendance,
+                internal_marks,
+                assignment_marks,
+                previous_gpa,
+                study_hours,
+                backlogs,
+                req.params.id
+            ]
         );
 
         if (result.affectedRows === 0) {
@@ -124,6 +229,7 @@ const updateStudent = async (req, res) => {
             message: "Student updated successfully",
             data: rows[0]
         });
+
     } catch (error) {
         console.error(error);
 

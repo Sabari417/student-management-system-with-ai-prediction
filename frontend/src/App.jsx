@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Students from "./pages/Students";
 import AddStudent from "./pages/AddStudent";
+import AIPrediction from "./pages/AIPrediction";
 
 import "./index.css";
 
@@ -22,6 +23,9 @@ function App() {
                         <Link to="/students">Students</Link>
                         <Link to="/students/add">
                             Add Student
+                        </Link>
+                        <Link to="/ai-prediction">
+                            AI Prediction
                         </Link>
                     </div>
                 </nav>
@@ -43,6 +47,11 @@ function App() {
                         <Route
                             path="/students/add"
                             element={<AddStudent />}
+                        />
+
+                        <Route
+                            path="/ai-prediction"
+                            element={<AIPrediction />}
                         />
                     </Routes>
                 </main>
